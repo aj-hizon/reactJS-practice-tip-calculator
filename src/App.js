@@ -52,6 +52,12 @@ function Inputs({ billAmount, setBillAmount, friendTipPercentage, setFriendTipPe
         setFriendTipPercentage={setFriendTipPercentage} 
       >How did your friend like the service
       </FriendPercentage>
+
+      <ResetButton
+        setBillAmount={setBillAmount}
+        setFriendTipPercentage={setFriendTipPercentage}
+        setUserTipPercentage={setUserTipPercentage}
+      />
     </div>
   )
 }
@@ -64,7 +70,7 @@ function TotalToPay({ billAmount, totalTipPercentage, totalTip }){
       </p>
       <div className="w-[6rem] h-[0.1rem] bg-white mx-auto"></div>
       <p className=" mx-auto rounded-full font-thin uppercase text-2xl tracking-widest">total</p>
-      <div className="grid grid-cols-2 w-[30rem] space-x-2 mx-auto items-center">
+      <div className="grid grid-cols-2 w-[20rem] space-x-2 mx-auto items-center">
           <p className="text-xl sm:text-2xl font-bold tracking-wider text-right">${billAmount}</p>
           <p className="text-white/70 text-sm sm:text-lg font-semibold tracking-widest text-left">BILL</p>
           <p className="text-xl sm:text-2xl font-bold tracking-wider text-right">${(billAmount * totalTipPercentage).toFixed(1)}</p>
@@ -87,8 +93,8 @@ function BillAmount({ billAmount, setBillAmount, children }){
   return(
     <div className="text-center">
       <input 
-        className="text-xl py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%]" 
-        type="text"
+        className="text-xl py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%] hover:bg-[#22d7a2] focus:bg-[#22d7a2] focus:text-white hover:text-white duration-300" 
+        type="number"
         value={billAmount}
         onChange={(e) => setBillAmount(Number(e.target.value))}
       />
@@ -101,7 +107,7 @@ function YourPercentage({ children, setUserTipPercentage, userTipPercentage }){
   return(
     <div className="text-center">
       <select 
-        className=" text-lg py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%]" 
+        className=" text-lg py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%] hover:bg-[#22d7a2] focus:bg-[#22d7a2] focus:text-white hover:text-white duration-300" 
         value={userTipPercentage}
         onChange={(e) => setUserTipPercentage(Number(e.target.value))}
       >
@@ -120,8 +126,8 @@ function FriendPercentage({ children, setFriendTipPercentage, friendTipPercentag
   return(
     <div className="text-center ">
       <select 
-        className="text-lg py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%]" 
-        value={friendTipPercentage}
+        className="text-lg py-2 text-[#16d69d] border-2 border-[#22d7a2] rounded-full text-center w-[100%] hover:bg-[#22d7a2] hover:text-white focus:bg-[#22d7a2] focus:text-white duration-300" 
+        value={friendTipPercentage}s
         onChange={(e) => setFriendTipPercentage(Number(e.target.value))}
         >
         <option value={0}>Dissatified (0%)</option>
@@ -134,4 +140,19 @@ function FriendPercentage({ children, setFriendTipPercentage, friendTipPercentag
   )
 }
 
-
+function ResetButton({ setBillAmount, setFriendTipPercentage, setUserTipPercentage }){
+  return(
+    <div className="">
+      <button 
+        className="text-lg py-2 text-white border-2 border-[#22d7a2] rounded-full text-center w-[100%] font-bold tracking-widest bg-[#22d7a2] hover:bg-white hover:text-[#16d69d] duration-300"
+        onClick={() => {
+          setBillAmount(0)
+          setFriendTipPercentage(0)
+          setUserTipPercentage(0)
+        }}
+      >
+        RESET
+      </button>
+    </div>
+  )
+}
